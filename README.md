@@ -71,7 +71,7 @@ Network tab to view the response from the server. You should see that we are
 successfully returning the validation errors and the status code from this
 request:
 
-![network 422 errors](network-422-error.png)
+![network 422 errors](https://raw.githubusercontent.com/learn-co-curriculum/phase-4-validation-messages-and-error-handling/master/network-422-error.png)
 
 Now that we have the error messages back from the server, how can we show them
 to our users so that they know how to fix them?
