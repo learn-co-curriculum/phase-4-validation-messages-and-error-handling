@@ -11,7 +11,7 @@ In previous lessons, we learned how to use Active Record to perform server-side
 validations. Now, let's see how we can use those error messages to display
 useful information to our users so they can submit valid data.
 
-To get the backend set up, `cd` into the `dvd-shop-api` folder, and run:
+To get the backend set up, run:
 
 ```sh
 bundle install
@@ -19,11 +19,11 @@ rails db:migrate db:seed
 rails s
 ```
 
-Then, in a new terminal, `cd` into the `dvd-shop` folder and run the frontend:
+Then, in a new terminal, run the frontend:
 
 ```sh
-npm install
-npm start
+npm install --prefix client
+npm start --prefix client
 ```
 
 Confirm both applications are both up and running by visiting
@@ -98,7 +98,7 @@ whether the response has a good status code (200-300 range) or a bad status code
 (400-500 range):
 
 ```js
-fetch("http://localhost:3000/movies", {
+fetch("/movies", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -178,7 +178,7 @@ read:
 ```js
 function handleSubmit(e) {
   e.preventDefault();
-  fetch("http://localhost:3000/movies", {
+  fetch("/movies", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -204,7 +204,7 @@ One way we can clean this up is using the [`async/await`][async await] syntax:
 async function handleSubmit(e) {
   e.preventDefault();
   // fetch returns a Promise, we must await it
-  const response = await fetch("http://localhost:3000/movies", {
+  const response = await fetch("/movies", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

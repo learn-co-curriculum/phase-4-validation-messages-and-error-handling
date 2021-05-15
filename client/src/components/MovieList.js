@@ -3,12 +3,12 @@ import styled from "styled-components";
 import CategoryFilter from "./CategoryFilter";
 import MovieCard from "./MovieCard";
 
-function MovieList(props) {
+function MovieList() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/movies")
+    fetch("/movies")
       .then((r) => r.json())
       .then((movies) => {
         setMovies(movies);
