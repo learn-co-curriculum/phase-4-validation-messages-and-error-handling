@@ -26,7 +26,7 @@ npm install --prefix client
 npm start --prefix client
 ```
 
-Confirm both applications are both up and running by visiting
+Confirm both applications are up and running by visiting
 [`localhost:4000`](http://localhost:4000) and viewing the list of movies in your
 React application.
 
@@ -71,7 +71,7 @@ Network tab to view the response from the server. You should see that we are
 successfully returning the validation errors and the status code from this
 request:
 
-![network 422 errors](https://raw.githubusercontent.com/learn-co-curriculum/phase-4-validation-messages-and-error-handling/master/network-422-error.png)
+![network 422 errors](https://curriculum-content.s3.amazonaws.com/phase-4/validation-messages-and-error-handling/network-422-error.png)
 
 Now that we have the error messages back from the server, how can we show them
 to our users so that they know how to fix them?
@@ -93,9 +93,8 @@ went wrong with our request. So, we need to:
 Let's take things one step at a time. First: **Check if we got a good response
 or a bad response**.
 
-Using `fetch`, we can use the `.ok` property of the `response` object to see
-whether the response has a good status code (200-300 range) or a bad status code
-(400-500 range):
+In the `MovieForm` component's `handleSubmit` function, modify the fetch request
+as follows:
 
 ```js
 fetch("/movies", {
@@ -104,35 +103,21 @@ fetch("/movies", {
     "Content-Type": "application/json",
   },
   body: JSON.stringify(formData),
-}).then((response) => {
-  console.log(response);
-  /*
-    body: (...)
-    bodyUsed: false
-    headers: Headers {}
-    ok: false // => ok is false for bad status codes
-    redirected: false
-    status: 422
-    statusText: "Unprocessable Entity"
-    type: "cors"
-    url: "http://localhost:3000/movies"
-  */
-});
-```
-
-We can use this value to determine what we want to do with the response:
-
-```js
-.then((response) => {
-  if (response.ok) {
-    response.json().then((newMovie) => console.log(newMovie));
-  } else {
-    response.json().then((errorData) => console.error(errorData));
-  }
 })
+.then((response) => console.log(response));
 ```
 
-If the response is not ok, we'll want to display some error messages to the user; that means we'll need to keep track of those error messages in state, and re-render the component when those error messages are updated:
+Next, try submitting the form with invalid data again and take a look at the
+response object that is logged in the console:
+
+![fetch bad response](https://curriculum-content.s3.amazonaws.com/phase-4/validation-messages-and-error-handling/bad-fetch-response.png)
+
+We can use the `.ok` property of the `response` object to see whether the
+response has a good status code (200-300 range) or a bad status code (400-500
+range) and handle the response accordingly. If the response is not ok, we'll want
+to display some error messages to the user; that means we'll need to keep track
+of those error messages in state, and re-render the component when those error
+messages are updated:
 
 ```js
 function MovieForm() {
@@ -163,7 +148,7 @@ from our component:
         <li key={error}>{error}</li>
       ))}
     </ul>
-  );
+  )
 }
 ```
 
@@ -200,7 +185,7 @@ required to read the JSON data from the response isn't particularly elegant.
 One way we can clean this up is using the [`async/await`][async await] syntax:
 
 ```js
-// make the funciton async to enable the await keyword
+// make the function async to enable the await keyword
 async function handleSubmit(e) {
   e.preventDefault();
   // fetch returns a Promise, we must await it
@@ -214,9 +199,9 @@ async function handleSubmit(e) {
   // response.json() returns a Promise, we must await it
   const data = await response.json();
   if (response.ok) {
-    setErrors(data.errors);
-  } else {
     console.log("Movie created:", data);
+  } else {
+    setErrors(data.errors);
   }
 }
 ```
@@ -228,9 +213,9 @@ do with that data based on whether or not the response was `ok`.
 
 ## Conclusion
 
-To handle server side validations, we can leverage Active Record to check out
+To handle server side validations, we can leverage Active Record to check our
 model's validity before saving bad data to the database. We can also send back
-different responses data with different status codes from our controller actions
+different response data with different status codes from our controller actions
 based on the validity of our data.
 
 To help our users correct these validation errors, we need to show them the
