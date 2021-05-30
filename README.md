@@ -57,12 +57,10 @@ it is created, and respond appropriately:
 
 ```rb
 def create
-  movie = Movie.create(movie_params)
-  if movie.valid?
-    render json: movie, status: :created
-  else
-    render json: { errors: movie.errors.full_messages }, status: :unprocessable_entity
-  end
+  movie = Movie.create!(movie_params)
+  render json: movie, status: :created
+rescue
+  render json: { errors: movie.errors.full_messages }, status: :unprocessable_entity
 end
 ```
 
@@ -103,8 +101,7 @@ fetch("/movies", {
     "Content-Type": "application/json",
   },
   body: JSON.stringify(formData),
-})
-.then((response) => console.log(response));
+}).then((response) => console.log(response));
 ```
 
 Next, try submitting the form with invalid data again and take a look at the
@@ -148,7 +145,7 @@ from our component:
         <li key={error}>{error}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
