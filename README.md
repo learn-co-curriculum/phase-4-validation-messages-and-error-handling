@@ -59,8 +59,8 @@ it is created, and respond appropriately:
 def create
   movie = Movie.create!(movie_params)
   render json: movie, status: :created
-rescue ActiveRecord::RecordInvalid => exception
-  render json: { errors: exception.record.errors }, status: :unprocessable_entity
+rescue ActiveRecord::RecordInvalid => e
+  render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
 end
 ```
 
