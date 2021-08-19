@@ -145,7 +145,7 @@ from our component:
         <li key={error}>{error}</li>
       ))}
     </ul>
-  );
+  )
 }
 ```
 
