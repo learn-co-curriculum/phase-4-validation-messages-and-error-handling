@@ -13,17 +13,17 @@ useful information to our users so they can submit valid data.
 
 To get the backend set up, run:
 
-```sh
-bundle install
-rails db:migrate db:seed
-rails s
+```console
+$ bundle install
+$ rails db:migrate db:seed
+$ rails s
 ```
 
 Then, in a new terminal, run the frontend:
 
-```sh
-npm install --prefix client
-npm start --prefix client
+```console
+$ npm install --prefix client
+$ npm start --prefix client
 ```
 
 Confirm both applications are up and running by visiting
@@ -145,7 +145,7 @@ from our component:
         <li key={error}>{error}</li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
