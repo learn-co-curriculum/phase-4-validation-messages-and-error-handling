@@ -133,7 +133,7 @@ function MovieForm() {
 })
 ```
 
-We'll also want to conditionally display the errors in the JSX being returned
+We'll also want to [conditionally display][inline-if] the errors in the JSX being returned
 from our component:
 
 ```jsx
@@ -179,7 +179,7 @@ function handleSubmit(e) {
 In particular, working with the `response` object and the Promise chaining
 required to read the JSON data from the response isn't particularly elegant.
 
-One way we can clean this up is using the [`async/await`][async await] syntax:
+One way we can clean this up is using the [`async/await`][async-await] syntax:
 
 ```js
 // make the function async to enable the await keyword
@@ -224,6 +224,7 @@ them somewhere on the form using JSX.
 ## Resources
 
 - [Using Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#checking_that_the_fetch_was_successful)
-- [async/await][async await]
+- [async/await][async-await]
 
-[async await]: https://javascript.info/async-await
+[async-await]: https://javascript.info/async-await
+[inline-if]: https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator
