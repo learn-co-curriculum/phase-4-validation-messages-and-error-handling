@@ -210,16 +210,26 @@ do with that data based on whether or not the response was `ok`.
 
 ## Conclusion
 
-To handle server side validations, we can leverage Active Record to check our
+To handle server-side validations, we can leverage Active Record to check our
 model's validity before saving bad data to the database. We can also send back
 different response data with different status codes from our controller actions
 based on the validity of our data.
 
 To help our users correct these validation errors, we need to show them the
-error messages from the server. We can leverage the `response.ok` property to
-decide how to handle successful vs unsuccessful responses from the server. In a
-React application, we can then use state to hold the error messages and render
-them somewhere on the form using JSX.
+error messages from the server. We can write some conditional code to handle
+successful vs unsuccessful responses from the server. In a React application, we
+can then use state to hold the error messages and render them somewhere on the
+form using JSX.
+
+## Check For Understanding
+
+Before you move on, make sure you can answer the following questions:
+
+1. When we submit a `fetch` request to the server, what property of the
+   `response` object can we use to help us write conditional code to handle
+   server-side validation errors?
+2. What steps do you need to complete in order to capture validation error
+   information and display it to the user?
 
 ## Resources
 
