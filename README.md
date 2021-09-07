@@ -133,20 +133,24 @@ function MovieForm() {
 })
 ```
 
-We'll also want to [conditionally display][inline-if] the errors in the JSX being returned
-from our component:
+We'll also want to [conditionally display][inline-if] the errors in the JSX
+being returned from our component:
 
 ```jsx
-// somewhere in the JSX returned by MovieForm
-{
-  errors.length > 0 && (
+// In the JSX returned by MovieForm:
+
+<form onSubmit={handleSubmit}>
+  {/* rest of form elements here... */}
+
+  {errors.length > 0 && (
     <ul style={{ color: "red" }}>
       {errors.map((error) => (
         <li key={error}>{error}</li>
       ))}
     </ul>
-  );
-}
+  )}
+  <SubmitButton type="submit">Add Movie</SubmitButton>
+</form>
 ```
 
 Now the user should see the error messages on the form when it doesn't pass our
