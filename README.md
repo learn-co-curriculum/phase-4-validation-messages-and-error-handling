@@ -225,11 +225,9 @@ form using JSX.
 
 Before you move on, make sure you can answer the following questions:
 
-1. When we submit a `fetch` request to the server, what property of the
-   `response` object can we use to help us write conditional code to handle
-   server-side validation errors?
-2. What steps do you need to complete in order to capture validation error
-   information and display it to the user?
+1. How can we differentiate between a successful and unsuccessful response using
+   `fetch`?
+2. Why might it be important to display validation error messages to our users?
 
 ## Resources
 
