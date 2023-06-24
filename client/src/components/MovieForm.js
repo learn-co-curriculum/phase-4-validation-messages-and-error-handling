@@ -2,6 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 
 function MovieForm() {
+  const [errors, setErrors] = useState([]);
+
   const [formData, setFormData] = useState({
     title: "",
     year: new Date().getFullYear(),
@@ -23,9 +25,37 @@ function MovieForm() {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((newMovie) => console.log(newMovie));
+    .then((response) => {
+      if (response.ok) {
+        response.json().then((newMovie) => console.log(newMovie));
+      } else {
+        response.json().then((errorData) => setErrors(errorData.errors));
+      }
+    });
   }
+  //One way we can clean this handleSubmit function using the async/await
+  /*
+  // make the function async to enable the await keyword
+  async function handleSubmit(e) {
+    e.preventDefault();
+    // fetch returns a Promise, we must await it
+    const response = await fetch("/movies", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+    // response.json() returns a Promise, we must await it
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Movie created:", data);
+    } else {
+      setErrors(data.errors);
+    }
+  }
+  */
+
 
   function handleChange(e) {
     const value =
@@ -125,6 +155,14 @@ function MovieForm() {
             />
           </label>
         </FormGroup>
+
+        {errors.length > 0 && (
+          <ul style={{ color: "red" }}>
+            {errors.map((error) => (
+              <li key={error}>{error}</li>
+            ))}
+          </ul>
+        )}
         <SubmitButton type="submit">Add Movie</SubmitButton>
       </form>
     </Wrapper>
